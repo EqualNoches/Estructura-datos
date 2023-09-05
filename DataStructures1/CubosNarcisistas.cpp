@@ -18,20 +18,23 @@ int main(int argc, char const *argv[])
 
         while (i < 1000)
         {
-            int actualNumber = i;
-            int answer;
-            while (actualNumber > 0)
+            int numberExtract = i;
+            int answer = 0;
+            while (numberExtract != 0)
             {
-                actualNumber = actualNumber % 10;
+                int actualNumber = numberExtract % 10;
                 answer += Cubed(actualNumber);
-                actualNumber /= 10;
-                cout << answer;
+                numberExtract /= 10;
             }
 
             if (answer == i)
             {
-                cout << "Uno de los numeros cubos de narcisista es" << answer << endl;
+                cout << "Uno de los numeros cubos de narcisista es: " << answer << endl;
                 itterations++;
+            }
+            if (i > 1000)
+            {
+                break;
             }
             i++;
         }
