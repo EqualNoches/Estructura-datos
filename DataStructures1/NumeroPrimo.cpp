@@ -26,8 +26,7 @@ int main(int argc, char const *argv[])
     }
     if (validation)
     {
-        cout << "El numeros es primo" << endl
-             << "y sus factores son: 1 y " << number << endl;
+        cout << "El numeros es primo" << endl;
     }
     else
     {

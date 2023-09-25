@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
     bool Bingo = true;
     while (Hour <= 24)
     {
-        for (int Minutes = 1; Minutes <= 60; Minutes++)
+        for (int Minutes = 1; Minutes <= 59; Minutes++)
         {
             temp = (Hour * Hour) + (Minutes * Minutes);
             int HourTemp = temp / 100;
