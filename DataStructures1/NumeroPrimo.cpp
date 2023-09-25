@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 using namespace std;
 
 void isDigit(int &i)
@@ -19,7 +20,7 @@ int main(int argc, char const *argv[])
     isDigit(number);
     for (int i = 2; i < number; i++)
     {
-        if (number % i == 0) validation = false;
+        if (number % (i*i) == 0) validation = false;
         break;     
     }
     if (validation)
@@ -30,6 +31,5 @@ int main(int argc, char const *argv[])
     {
         cout << "El numero no es primo"<< endl;
     }
-    
     return 0;
 }
