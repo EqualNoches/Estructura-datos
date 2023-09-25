@@ -20,17 +20,18 @@ int main(int argc, char const *argv[])
     isDigit(number);
     for (int i = 2; i < number; i++)
     {
-        if (number % (i*i) == 0) validation = false;
-        break;     
+        if (number % (i * i) == 0)
+            validation = false;
+        break;
     }
     if (validation)
     {
-        cout << "El numeros es primo"<< endl
-             << "y sus factores son: 1 y "<<number<<endl;
+        cout << "El numeros es primo" << endl
+             << "y sus factores son: 1 y " << number << endl;
     }
     else
     {
-        cout << "El numero no es primo"<< endl;
+        cout << "El numero no es primo" << endl;
     }
     return 0;
 }

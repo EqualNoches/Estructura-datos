@@ -17,7 +17,8 @@ int main(int argc, char const *argv[])
                 number += i;
             }
         }
-        if (number == par) factor = true;
+        if (number == par)
+            factor = true;
         if (factor)
         {
             cout << par << " Es un numero Perfecto" << endl;
