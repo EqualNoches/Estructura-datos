@@ -3,26 +3,47 @@ using namespace std;
 
 int squared(int i)
 {
-    int squared = i*i;
+    int squared = i * i;
     return squared;
 }
 int main(int argc, char const *argv[])
 {
-    int itterarions = 0;
-    int counter =0;
+    int itterarions = 1;
+    int counter = 0;
     while (itterarions < 500)
     {
         int number = squared(itterarions);
-        int LastDigitNumber = itterarions%10;
-        int LastDigitSquared = number%10;
-        if (LastDigitNumber == LastDigitSquared)
+        int LastDigitSquared = number % 10;
+        int Last2DigitSquared = number % 100;
+        int Last3DigitSquared = number%1000;
+        if (itterarions < 10)
         {
-            cout << "Uno de los numeros de la flota de camiones era "<<itterarions<<" y el numero cuadrado es "<<number<<endl;
-            counter++;
+            if (number == LastDigitSquared)
+            {
+                cout << itterarions << endl;
+                counter++;
+            }
+        }
+        else if (itterarions > 10 && itterarions < 100)
+        {
+            if (itterarions == Last2DigitSquared)
+            {
+                cout << itterarions << endl;
+                counter++;
+            }
+        }
+        else
+        {
+            if (itterarions == Last3DigitSquared)
+            {
+                cout << itterarions<<endl;
+                counter++;
+            }
+            
         }
         itterarions++;
     }
-    cout<<"El señor tiene " << counter << " camiones";
-    
+    cout << "El señor tiene " << counter << " camiones";
+
     return 0;
 }
