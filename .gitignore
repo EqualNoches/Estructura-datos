@@ -30,11 +30,7 @@
 *.exe
 *.out
 *.app
-*.build
 
 #inecesary archives.
 *.vscode
 
-#other
-*.flatpak-builder
-*.json
