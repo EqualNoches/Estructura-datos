@@ -1,8 +1,0 @@
-#Executables
-*.build
-*.exe
-*.out
-
-#other
-*.flatpak-builder
-*.json
