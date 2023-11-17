@@ -6,11 +6,14 @@ se produzca el patron mostrado imprima solamente un asterisco a la vez
 #include <iostream>
 using namespace std;
 
-int main(void) {
+int main(void)
+{
   int fila = 25;
-  while (fila > 0) {
+  while (fila > 0)
+  {
 
-    if (fila % 5 == 0) {
+    if (fila % 5 == 0)
+    {
       cout << "\n";
     }
     cout << "*";
