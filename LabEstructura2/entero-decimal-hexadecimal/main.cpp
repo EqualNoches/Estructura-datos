@@ -26,24 +26,25 @@ string convertDecimalBinary(int number)
 
 string convertBinaryHex(int decimal)
 {
-    int  hexNumber = 0;
+    int hexNumber = 0;
     string hexLetter;
     while (decimal != 0)
     {
         int temp;
         temp = (decimal % 16);
-        if (temp < 10) {
+        if (temp < 10)
+        {
             temp += 48;
         }
-        else if (temp <15) {
+        else if (temp < 15)
+        {
             temp += 55;
-        } 
+        }
         hexNumber = hexNumber * 100 + temp;
         decimal /= 16;
     }
     hexLetter = hexNumber;
-    
-    
+
     return hexLetter;
 }
 
