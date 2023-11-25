@@ -32,7 +32,12 @@ string convertBinaryHex(int decimal)
     {
         int temp;
         temp = (decimal % 16);
-        (temp < 10) ? temp += 48: temp += 55; 
+        if (temp < 10) {
+            temp += 48;
+        }
+        else if (temp <15) {
+            temp += 55;
+        } 
         hexNumber = hexNumber * 100 + temp;
         decimal /= 16;
     }
