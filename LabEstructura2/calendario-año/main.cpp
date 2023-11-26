@@ -6,6 +6,7 @@ This program was Made by Edward Isaac Díaz Campusano
 */
 
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 struct time_struct
@@ -23,10 +24,98 @@ struct time_struct
 };
 
 int monthDays[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-static string months[] = {"January", "February", "March", "April", "May", "July", "August", "September", "October", "November", "December"};
+string months[12] = {"January", "February", "March", "April", "May", "July", "August", "September", "October", "November", "December"};
 
-void printCalendar()
+void printCalendar(int year)
 {
+    time_t ttime = time(0);
+    tm *local_time = localtime(&ttime);
+    int current_year = 1900 + local_time->tm_year;
+    int current_month = local_time->tm_mon + 1;
+    int current_day = local_time->tm_mday;
+
+    cout << " -----------------------------------\n"
+         << "\033[1;33m"
+         << "           Calendar - " << year
+         << "\033[0m" << endl;
+    cout << " -----------------------------------" << endl;
+
+    int days;
+    int startLeap;
+
+    int tempY = year-1;
+    startLeap = (tempY + tempY / 4 - tempY / 100 + tempY / 400 + 1) % 7;   //zeller algorithm implementation.
+
+    for (int i = 0; i < 11; i++) {
+        if ((year %400 == 0 || (year %4 == 0 && year % 100 != 0)) && i==1) { // determine if the February is part of a leap year
+            days = 29;
+        }
+        else {
+            days = monthDays[i];
+        }
+        cout << endl;
+
+        if (year == current_year && current_month == i+1) {
+            cout << "\033[1;1;32m"
+                 << "  ------------" << months[i] << "-------------"
+                 << "\033[0m" << endl;
+        }
+        else if (year < current_year || (year == current_year && i + 1 < current_month))
+        {
+            cout << "\033[31m"
+                 << "  ------------" << months[i] << "-------------"
+                 << "\033[0m" << endl;
+        }
+        else
+        {
+            cout << "  ------------" << months[i] << "-------------"
+                 << endl;
+        }
+
+        if (year < current_year || (year == current_year && i + 1 <= current_month))
+        {
+            cout << "\033[35m"
+                 << "  Sun"
+                 << "\033[0m";
+            cout << "\033[1;33m"
+                 << "  Mon  Tue  Wed  Thu  Fri ";
+            cout << "\033[35m"
+                 << "  Sat"
+                 << "\033[0m" << endl;
+        }
+        else
+        {
+            cout << "  Sun  Mon  Tue  Wed  Thu  Fri  Sat" << endl;
+        }
+        int k;
+        for (k = 0; k < startLeap; k++)
+            cout << "     ";
+
+        for (int j = 1; j <= days; j++)
+        {
+            k++;
+            if (year == current_year && current_month == i + 1 && current_day == j)
+            {
+                cout << "\033[1;1;32m" << setw(5) << j << "\033[0m";
+            }
+            else if (year < current_year || (year == current_year && i + 1 < current_month) || (year == current_year && i + 1 == current_month && j < current_day))
+            {
+                cout << "\033[31m" << setw(5) << j << "\033[0m";
+            }
+            else
+            {
+                cout << setw(5) << j;
+            }
+            if (k > 6)
+            {
+                k = 0;
+                cout << endl;
+            }
+        }
+        if (k)
+            cout << endl;
+        startLeap = k;
+    }
 }
 void menu()
 {
@@ -45,7 +134,7 @@ void menu()
         }
         else
         {
-            printCalendar();
+            printCalendar(year);
         }
     }
 }
