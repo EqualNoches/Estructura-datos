@@ -7,6 +7,8 @@ This program was Made by Edward Isaac Díaz Campusano
 
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
+#include <conio.h>
 using namespace std;
 
 struct time_struct
@@ -20,11 +22,11 @@ struct time_struct
     int tm_wDay;
     int tm_yDay;
     int tm_year;
-    int tm_lYear;  //leap year
+    int tm_lYear; // leap year
 };
 
 int monthDays[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-string months[12] = {"January", "February", "March", "April", "May", "July", "August", "September", "October", "November", "December"};
+string months[12] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
 void printCalendar(int year)
 {
@@ -43,19 +45,23 @@ void printCalendar(int year)
     int days;
     int startLeap;
 
-    int tempY = year-1;
-    startLeap = (tempY + tempY / 4 - tempY / 100 + tempY / 400 + 1) % 7;   //zeller algorithm implementation.
+    int tempY = year - 1;
+    startLeap = (tempY + tempY / 4 - tempY / 100 + tempY / 400 + 1) % 7; // zeller algorithm implementation.
 
-    for (int i = 0; i < 11; i++) {
-        if ((year %400 == 0 || (year %4 == 0 && year % 100 != 0)) && i==1) { // determine if the February is part of a leap year
+    for (int i = 0; i < 12; i++)
+    {
+        if ((year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) && i == 1)
+        { // determine if the February is part of a leap year
             days = 29;
         }
-        else {
+        else
+        {
             days = monthDays[i];
         }
         cout << endl;
 
-        if (year == current_year && current_month == i+1) {
+        if (year == current_year && current_month == i + 1)
+        {
             cout << "\033[1;1;32m"
                  << "  ------------" << months[i] << "-------------"
                  << "\033[0m" << endl;
@@ -117,11 +123,32 @@ void printCalendar(int year)
         startLeap = k;
     }
 }
+
+/// @brief confirm if this conditional is a digit by macking the "cin" inside of the function
+/// @param i
+/// @return if is going to check if the operation is successfull
+void validInput(int &i)
+{
+    while (!(cin >> i))
+    {
+        cout << "Porfavor introduzca un valor valido.";
+        cin.clear();
+        cin.ignore(122, '\n');
+    }
+}
+
 void menu()
 {
     while (true)
     {
         int year;
+        int confirmation; // This will validate if continue or exit
+
+#ifdef _WIN32
+        system("cls");
+#else
+        system("clear");
+#endif
         cout << "Bienvenido al programa de calendario" << endl;
         cout << "En este programa podran llamar a que se muestre cualquier calendario de este año" << endl;
 
@@ -130,18 +157,35 @@ void menu()
 
         if (cin.fail())
         {
-            break;
+            cout << endl
+                 << "Incorrect Input" << endl
+                 << endl;
+            exit(0);
         }
         else
         {
             printCalendar(year);
+            cout << endl
+                 << "continue: '1'\nexit: '0'\nchoice(0,1): ";
+            validInput(confirmation);
+            switch (confirmation)
+            {
+            case 0:
+                exit(0);
+                break;
+            case 1:
+                continue;
+            default:
+                cout << "Introduzca un valor valido." << endl;
+                confirmation = 0;
+                break;
+            }
         }
     }
 }
-
-int main(int argc, char const *argv[])
-{
-    cout << "Inicializando programa";
-    menu();
-    return 0;
-}
+    int main(int argc, char const *argv[])
+    {
+        cout << "Inicializando programa";
+        menu();
+        return 0;
+    }
