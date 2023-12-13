@@ -31,6 +31,7 @@
 *.out
 *.app
 
-#inecesary archives.
+#unnecessary archives.
 *.vscode
+*.txt
 

@@ -1,12 +1,26 @@
+/*
+ * Grupo 1: Programa C++ que Invierta las palabras en un archivo de texto
+ * INTEGRANTES:
+ *              1113684 - Clay Manuel Gomera Arias
+ *              1116614 - Luis Daniel de la Cruz García
+ *              1114950 - Elian Gabriel Villegas Báez
+ *              1115808 - Edward Diaz
+ *              1113902 - Yu jhih Chen Yeh
+ *              1116238 - I Chia Chen Wang
+ *
+ * FECHA: 12/13/2023 <== Fecha de realización
+ */
+
+//* Librerias utilizadas
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <ctype.h>
 #include <sstream>
 
-/// @brief This function is in charged of reversing each word
+/// @brief Esta funcion se encarga de invertir cada palabra de forma singular
 /// @param word
-/// @return The word inputed, but reversed. For exameple: (input: word, output: drow)
+/// @return La palabra que fue parametrizada, en su forma invertida. Ejemplo: (input: word, output: drow)
 std::string string_reversing(std::string word)
 {
     std::string reversed;
@@ -16,6 +30,10 @@ std::string string_reversing(std::string word)
     }
     return reversed;
 }
+/// @brief Se encargará de modificar el archivo como un conjunto y luego introducirá el texto en conjunto
+/// @param inputNameFile
+/// @param outputNameFile
+/// @return Todo el texto con la modificación a cada palabra
 std::string bulkReversing(const std::string &inputNameFile, const std::string &outputNameFile)
 {
     char character;
@@ -50,6 +68,8 @@ std::string bulkReversing(const std::string &inputNameFile, const std::string &o
     return content.str();
 }
 
+/// @brief Funcion en caso de que el usuario decida cambiar el nombre del archivo de salida.
+/// @param inputNameFile
 void changedName(const std::string &inputNameFile)
 {
     std::string outputNameFile;
@@ -76,15 +96,19 @@ void changedName(const std::string &inputNameFile)
 
     bulkReversing(inputNameFile, outputNameFile);
 
-    std::cout << "\nEl archivo En reversa está en: " << outputNameFile << std::endl;
+    std::cout << "\nEl archivo manipulado con palabras en reverso está en: '" << outputNameFile << "'"<< std::endl;
 }
+
+/// @brief Función Principal: encargada de revisar si archivo existe e inicializar las variantes
+/// @param  void
 void Manipulation(void)
 {
-    // TODO: make a program in which a certain file inside a directory, each wordk will be changed backwards
+    // Inicialización de variables
     std::string inputNameFile, outputNameFile;
     char confirmation;
     std::ifstream inputFile;
 
+    // Bucle en caso de que el usuario no introduzca un valor valido
     while (!inputFile.is_open())
     {
         std::cout << "\nPorfavor ingrese el nombre del archivo. \nNo ponga el tipo de extension(.txt)\nEste programa solo puede reescribir archivos '.txt'\n\nNombre: ";
@@ -92,35 +116,38 @@ void Manipulation(void)
         inputNameFile += ".txt";
         std::ifstream inputFile(inputNameFile);
         inputFile.open(inputNameFile);
+        // Revisa si es un archivo de texto valido
         if (!inputFile.is_open())
         {
             std::cout << std::endl
                       << "\nError opening input file: " << inputNameFile << std::endl;
             std::cout << "Remember it needs to be a valid .txt (don't write .txt)" << std::endl;
         }
-        else
+        else // Si es un nombre correcto, cerrará el archivo para no tener inconvenientes futuros con la apertura y el cerrado
         {
             inputFile.close();
             break;
         }
     }
 
-    std::cout << "Desea que poner un nombre al archivos de salida? [y,N]: ";
+    // PRegunta si el ususario quiere cambiar el nombre del archivo de salida
+    std::cout << "Desea asignar un nombre al archivo de salida? [y, N]: ";
     std::cin >> confirmation;
-
     if (tolower(confirmation) == 'y')
     {
         changedName(inputNameFile);
     }
     else
     {
+        std::cout << "\nArchivo fue nombrado por defecto 'output.txt'\n"
+                  << std::endl;
         outputNameFile = "output.txt";
     }
     std::ofstream outputFile(outputNameFile);
 
     bulkReversing(inputNameFile, outputNameFile);
 
-    std::cout << "\nEl archivo En reversa está en: " << outputNameFile << std::endl;
+    std::cout << "\nEl archivo manipulado con palabras en reverso está en: '" << outputNameFile << "'"<< std::endl;
 }
 
 int main(int argc, char const *argv[])
