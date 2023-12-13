@@ -2,30 +2,32 @@
 #include <cmath>
 
 void drawCircle(int radius) {
-    int centerX = radius;
-    int centerY = radius;
-
-    for (int i = 0; i <= 2 * radius; ++i) {
-        for (int j = 0; j <= 2 * radius; ++j) {
-            // Check if a point is on the circumference of the circle
-            if (std::abs(std::pow(j - centerX, 2) + std::pow(i - centerY, 2) - std::pow(radius, 2)) < radius) {
-                std::cout << "* ";
+    for (int i = -radius; i <= radius; ++i) {
+        for (int j = -radius; j <= radius; ++j) {
+            double distance = std::sqrt(i * i + j * j);
+            
+            // Adjust the threshold for circle thickness
+            if (std::abs(distance - radius) < 0.5) {
+                std::cout << "# ";
             } else {
                 std::cout << "  ";
             }
         }
-        std::cout << std::endl;
+        std::cout << "\n";
     }
 }
 
 int main() {
     int radius;
 
-    // Get the radius from the user
     std::cout << "Enter the radius of the circle: ";
     std::cin >> radius;
 
-    // Draw the circle circumference
+    if (radius <= 0) {
+        std::cout << "Invalid radius. Please enter a positive integer.\n";
+        return 1;
+    }
+
     drawCircle(radius);
 
     return 0;
