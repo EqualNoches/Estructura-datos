@@ -107,13 +107,13 @@ void Manipulation(void)
 {
     // Inicialización de variables
     std::string inputNameFile, outputNameFile;
-    char confirmation;
+    std::string confirmation;
     std::ifstream inputFile;
 
     // Bucle en caso de que el usuario no introduzca un valor valido
     while (!inputFile.is_open())
     {
-        std::cout << "\nPorfavor ingrese el nombre del archivo. \nNo ponga el tipo de extension(.txt)\nEste programa solo puede reescribir archivos '.txt'\n\nNombre: ";
+        std::cout << "\nPorfavor ingrese el nombre del archivo. \nNo ponga el tipo de extension(.txt)\n Recuerde que su archivo debe terminar con un punto\nEste programa solo puede reescribir archivos '.txt'\n\nNombre: ";
         std::cin >> inputNameFile;
         inputNameFile += ".txt";
         std::ifstream inputFile(inputNameFile);
@@ -137,12 +137,12 @@ void Manipulation(void)
     {
         std::cout << "Desea asignar crear un nuevo archivo para la salida? [Y, N]: ";
         std::cin >> confirmation;
-        if (tolower(confirmation) == 'y')
+        if (confirmation == "y" || confirmation == "Y")
         {
             createNewFile(inputNameFile);
             exit(0);
         }
-        else if (tolower(confirmation == 'n'))
+        else if (confirmation == "n" || confirmation == "Y")
         {
             std::cout << "\nEl archivo de entrada va a ser reutilizado\n"
                       << std::endl;
