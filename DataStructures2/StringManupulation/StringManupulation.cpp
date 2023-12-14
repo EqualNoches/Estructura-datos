@@ -76,11 +76,12 @@ void changedName(const std::string &inputNameFile)
     std::ofstream outputFile;
     while (!outputFile.is_open())
     {
-        std::cout << "Please write your desired name for the file" << std::endl;
+        std::cout << "Please write your desired name for the file: ";
         std::cin >> outputNameFile;
         outputNameFile += ".txt";
         std::ofstream outputFile(outputNameFile);
         outputFile.open(outputNameFile);
+        std::string temp =outputNameFile; 
         if (!outputFile.is_open())
         {
             std::cout << std::endl
@@ -96,7 +97,7 @@ void changedName(const std::string &inputNameFile)
 
     bulkReversing(inputNameFile, outputNameFile);
 
-    std::cout << "\nEl archivo manipulado con palabras en reverso está en: '" << outputNameFile << "'"<< std::endl;
+    std::cout << "\nEl archivo manipulado con palabras en reverso está en: '" << outputNameFile << "'" << std::endl;
 }
 
 /// @brief Función Principal: encargada de revisar si archivo existe e inicializar las variantes
@@ -130,24 +131,34 @@ void Manipulation(void)
         }
     }
 
-    // PRegunta si el ususario quiere cambiar el nombre del archivo de salida
-    std::cout << "Desea asignar un nombre al archivo de salida? [y, N]: ";
-    std::cin >> confirmation;
-    if (tolower(confirmation) == 'y')
+    // Pregunta si el ususario quiere cambiar el nombre del archivo de salida
+    while (true)
     {
-        changedName(inputNameFile);
-    }
-    else
-    {
-        std::cout << "\nArchivo fue nombrado por defecto 'output.txt'\n"
-                  << std::endl;
-        outputNameFile = "output.txt";
+        std::cout << "Desea asignar un nombre al archivo de salida? [y, N]: ";
+        std::cin >> confirmation;
+        if (tolower(confirmation) == 'y')
+        {
+            changedName(inputNameFile);
+            exit(0);
+        }
+        else if (tolower(confirmation == 'n'))
+        {
+            std::cout << "\nArchivo fue nombrado por defecto 'output.txt'\n"
+                      << std::endl;
+            outputNameFile = "output.txt";
+            break;
+        }
+        else
+        {
+            std::cout << "\nPorfavor elija una opcion valida.\n"
+                      << std::endl;
+        }
     }
     std::ofstream outputFile(outputNameFile);
 
     bulkReversing(inputNameFile, outputNameFile);
 
-    std::cout << "\nEl archivo manipulado con palabras en reverso está en: '" << outputNameFile << "'"<< std::endl;
+    std::cout << "\nEl archivo manipulado con palabras en reverso está en: '" << outputNameFile << "'" << std::endl;
 }
 
 int main(int argc, char const *argv[])
