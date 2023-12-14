@@ -41,9 +41,8 @@ std::string bulkReversing(const std::string &inputNameFile, const std::string &o
     std::stringstream content;
 
     std::ifstream inputFile;
-    inputFile.open(inputNameFile);
     std::ofstream outputFile;
-    outputFile.open(outputNameFile);
+    inputFile.open(inputNameFile);
 
     while (inputFile.get(character))
     {
@@ -62,6 +61,9 @@ std::string bulkReversing(const std::string &inputNameFile, const std::string &o
         }
     }
     inputFile.close();
+
+    outputFile.open(outputNameFile);
+    outputFile.clear();
     outputFile << content.str();
     outputFile.close();
 
@@ -70,7 +72,7 @@ std::string bulkReversing(const std::string &inputNameFile, const std::string &o
 
 /// @brief Funcion en caso de que el usuario decida cambiar el nombre del archivo de salida.
 /// @param inputNameFile
-void changedName(const std::string &inputNameFile)
+void createNewFile(const std::string &inputNameFile)
 {
     std::string outputNameFile;
     std::ofstream outputFile;
@@ -80,7 +82,7 @@ void changedName(const std::string &inputNameFile)
         std::cin >> outputNameFile;
         outputNameFile += ".txt";
         std::ofstream outputFile(outputNameFile);
-        outputFile.open(outputNameFile); 
+        outputFile.open(outputNameFile);
         if (!outputFile.is_open())
         {
             std::cout << std::endl
@@ -133,18 +135,18 @@ void Manipulation(void)
     // Pregunta si el ususario quiere cambiar el nombre del archivo de salida
     while (true)
     {
-        std::cout << "Desea asignar un nombre al archivo de salida? [y, N]: ";
+        std::cout << "Desea asignar crear un nuevo para la salida? [y, N]: ";
         std::cin >> confirmation;
         if (tolower(confirmation) == 'y')
         {
-            changedName(inputNameFile);
+            createNewFile(inputNameFile);
             exit(0);
         }
         else if (tolower(confirmation == 'n'))
         {
-            std::cout << "\nArchivo fue nombrado por defecto 'output.txt'\n"
+            std::cout << "\nEl archivo de entrada va a ser reutilizado\n"
                       << std::endl;
-            outputNameFile = "output.txt";
+            outputNameFile = inputNameFile;
             break;
         }
         else
@@ -153,7 +155,6 @@ void Manipulation(void)
                       << std::endl;
         }
     }
-    std::ofstream outputFile(outputNameFile);
 
     bulkReversing(inputNameFile, outputNameFile);
 
