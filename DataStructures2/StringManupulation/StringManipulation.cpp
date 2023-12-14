@@ -122,8 +122,8 @@ void Manipulation(void)
         if (!inputFile.is_open())
         {
             std::cout << std::endl
-                      << "\nError opening input file: " << inputNameFile << std::endl;
-            std::cout << "Remember it needs to be a valid .txt (don't write .txt)" << std::endl;
+                      << "\nError abriendo el archivo: " << inputNameFile << std::endl;
+            std::cout << "Recuerde que de be ser un archivo .txt (no escriba .txt)" << std::endl;
         }
         else // Si es un nombre correcto, cerrará el archivo para no tener inconvenientes futuros con la apertura y el cerrado
         {
@@ -135,7 +135,7 @@ void Manipulation(void)
     // Pregunta si el ususario quiere cambiar el nombre del archivo de salida
     while (true)
     {
-        std::cout << "Desea asignar crear un nuevo para la salida? [y, N]: ";
+        std::cout << "Desea asignar crear un nuevo archivo para la salida? [Y, N]: ";
         std::cin >> confirmation;
         if (tolower(confirmation) == 'y')
         {
