@@ -78,7 +78,7 @@ void createNewFile(const std::string &inputNameFile)
     std::ofstream outputFile;
     while (!outputFile.is_open())
     {
-        std::cout << "Please write your desired name for the file: ";
+        std::cout << "Porfavor eliga el nombre para su archivo de salida: ";
         std::cin >> outputNameFile;
         outputNameFile += ".txt";
         std::ofstream outputFile(outputNameFile);
