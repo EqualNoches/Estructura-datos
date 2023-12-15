@@ -1,13 +1,20 @@
-CC:=g++ 
-CFLAGS:= -std=c++17 -lsfml-graphics -lsfml-window -lsfml-system -Wall -Wextra
-OUTPUT:=triangulo
+CC := g++
+CFLAGS := -std=c++17 -Wall -Wextra
+LIBS := -lsfml-graphics -lsfml-window -lsfml-system
+SFML_PATH := /src/include # Replace this with the actual path to your SFML installation
 
-all: triangulo.o
-	${CC} -o ${OUTPUT} triangulo.o ${CFLAGS}
+OUTPUT := triangulo
+
+all: $(OUTPUT)
+
+$(OUTPUT): triangulo.o
+	$(CC) -o $@ $^ $(LIBS)
+
+triangulo.o: triangulo.cpp
+	$(CC) $(CFLAGS) -c -o $@ $< -I$(SFML_PATH)
 
 clean:
-	rm -f triangulo
-	rm -f *.o
+	del /Q $(OUTPUT).exe *.o
 
 run: all
-	./${OUTPUT}
+	$(OUTPUT).exe

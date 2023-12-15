@@ -15,7 +15,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <ctype.h>
 #include <sstream>
 
 /// @brief Esta funcion se encarga de invertir cada palabra de forma singular
